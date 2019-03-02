@@ -9,7 +9,7 @@ var App = {
 
     FormView.initialize();
     RoomsView.initialize();
-    MessagesView.initialize();
+    
 
     // Fetch initial batch of messages
     App.startSpinner();
@@ -20,9 +20,12 @@ var App = {
   fetch: function(callback = ()=>{}) {
     Parse.readAll((data) => {
       // examine the response from the server request:
-      console.log(data);
+      for (let i = 0; i < data.length; i++) {
+        messages.results.push(data);
+      }
 
       callback();
+      MessagesView.initialize();
     });
   },
 
