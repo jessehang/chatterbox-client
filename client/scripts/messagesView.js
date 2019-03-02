@@ -4,8 +4,9 @@ var MessagesView = {
 
   initialize: function() {
     for(let i = 0; i < Messages.results.length; i++) {
-      MessagesView.$chat.append(MessagesView.render(Messages.results[i]));
+      this.$chats.append(MessageView.render(Messages.results[i]));
     }
+    
   },
 
   render: function() {

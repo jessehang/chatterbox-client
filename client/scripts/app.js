@@ -20,10 +20,12 @@ var App = {
   fetch: function(callback = ()=>{}) {
     Parse.readAll((data) => {
       // examine the response from the server request:
-      for (let i = 0; i < data.length; i++) {
-        messages.results.push(data);
+      for (let i = 0; i < data.results.length; i++) {
+        data.results[i].username = data.results[i].username || 'anon';
+        data.results[i].text = data.results[i].text || '';
+        Messages.results.push(data.results[i]);
       }
-
+      console.log(data);
       callback();
       MessagesView.initialize();
     });
