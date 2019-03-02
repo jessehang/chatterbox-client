@@ -7,7 +7,7 @@ var App = {
   initialize: function() {
     App.username = window.location.search.substr(10);
     FormView.initialize();
-    RoomsView.initialize();
+    
     
 
     // Fetch initial batch of messages
@@ -17,15 +17,25 @@ var App = {
 
   fetch: function(callback = ()=>{}) {
     Parse.readAll((data) => {
-      // examine the response from the server request:
+      // pushing all the data into Messages and Rooms array:
       for (let i = 0; i < data.results.length; i++) {
+        // changes empty usernames to anon
         data.results[i].username = data.results[i].username || 'anon';
-        data.results[i].text = data.results[i].text || '';
+        // changes empty text to an empty string
+        data.results[i].text = data.results[i].text || ''; 
+        // push data in Messages array
         Messages.results.push(data.results[i]);
+        // push data into Rooms
+        if (!Rooms[data.results[i].roomname]) {
+          Rooms[data.results[i].roomname] = data.results[i]
+        }
+        
       }
       console.log(data);
       callback();
       MessagesView.initialize();
+      RoomsView.initialize();
+      
     });
   },
 

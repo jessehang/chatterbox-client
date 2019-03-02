@@ -1,8 +1,11 @@
 var Rooms = {
-    rooms = []
+	// rooms : Messages.results.filter(roomName => roomName === Messages.results)
 
 };
 
 $('#roombutton').on('click', function(){
-    $('#roomname').val();
-  })
+	$('#roomname').val();
+})
+//   Rooms.rooms.map(room => )
+
+

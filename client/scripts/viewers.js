@@ -10,3 +10,10 @@ var MessageView = {
     `)
 
 };
+
+var RoomnameView = {
+
+  render: _.template(`
+    <option class="room"><%- roomname%></option>
+  `)
+}
