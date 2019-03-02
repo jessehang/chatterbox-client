@@ -9,7 +9,14 @@ var MessagesView = {
     
   },
 
-  render: function() {
+  renderMessage: function() {
+    var message = {
+      username: App.username,
+      text :$('#message').text(),
+      roomname: 'n/a'
+    };
+    Parse.create(message);
+    App.initialize();
   }
 
 };
