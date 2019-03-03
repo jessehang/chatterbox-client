@@ -1,37 +1,24 @@
 var RoomsView = {
 
-  $button: $('#rooms button'),
   $selector: $('.roomselector'),
 
   initialize: function() {
     for(let key in Rooms) {
       this.$selector.append(RoomnameView.render(Rooms[key]));
     }
+    
   },
-
-  render: function() {
-  }
 
 };
 
 
-// $chats: $('#chats'),
+// renders uniq rooms in the drop down
 
-// initialize: function() {
-//   for(let i = 0; i < Messages.results.length; i++) {
-//     this.$chats.append(MessageView.render(Messages.results[i]));
-//   }
-  
-// },
-
-// renderMessage: function() {
-//   var message = {
-//     username: App.username,
-//     text :$('#message').val(),
-//     roomname: 'n/a'
-//   };
-//   Parse.create(message);
-//   App.initialize();
-// }
-
-// };
+$('.roomselector').change('click', function(){
+  var specificRoom = Messages.results.filter(room => room.roomname === $('.roomselector').val());
+  App.startSpinner();
+  App.roomMessagesFetch(App.stopSpinner);
+  $('.chat').remove();
+  MessagesView.initialize(specificRoom, MessageView);
+  console.log($('#roomname').val())
+})

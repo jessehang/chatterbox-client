@@ -1,10 +1,10 @@
 var MessagesView = {
-
+  
   $chats: $('#chats'),
   // appends all messages to chats
-  initialize: function() {
-    for(let i = 0; i < Messages.results.length; i++) {
-      this.$chats.append(MessageView.render(Messages.results[i]));
+  initialize: function(selected, viewer) {
+    for(let i = 0; i < selected.length; i++) {
+      this.$chats.append(viewer.render(selected[i]));
     }
     
   },
@@ -13,10 +13,10 @@ var MessagesView = {
     var message = {
       username: App.username,
       text :$('#message').val(),
-      roomname: 'n/a'
+      roomname: $('#roomname').val()
     };
     Parse.create(message);
-    App.initialize();
+    this.$chats.prepend(MessageView.render(message));
   }
 
 };
